@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
+    /*
     //Login form
     @GetMapping("/login")
     public String loginPage(){
@@ -23,5 +24,5 @@ public class SecurityController {
     @GetMapping("/access-denied")
     public String accessDenied(){
         return "security/access-denied";
-    }
+    }*/
 }
