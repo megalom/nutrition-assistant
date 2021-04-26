@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new product</title>
+</head>
+<body>
+<h3> Add new product</h3>
+<div class="container">
+    <form action="#" th:action="@{/nutrition/products}" th:object="${productForm}" method="POST">
+
+        <!-- product name -->
+        <label for="productName">Product name</label>:
+        <input type="text" id="productName" th:field="*{name}" autofocus="autofocus"/> <br/>
+
+        <!-- protein -->
+        <label for="protein">Protein</label>:
+        <input type="text" id="protein" th:field="*{protein}"/> <br/>
+
+        <!-- fat -->
+        <label for="fat">Fat</label>:
+        <input type="text" id="fat" th:field="*{fat}"/> <br/>
+
+        <!-- nutrition -->
+        <label for="nutrition">Nutrition</label>:
+        <input type="text" id="nutrition" th:field="*{nutrition}"/> <br/>
+
+        <!-- price -->
+        <label for="price">Price</label>:
+        <input type="text" id="price" th:field="*{price}"/> <br/>
+
+        <a th:href="@{/nutrition/products}">back</a>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+
+</body>
+</html>

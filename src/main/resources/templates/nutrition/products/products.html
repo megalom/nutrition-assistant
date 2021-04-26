@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products list</title>
+</head>
+<body>
+<h3>List of products:</h3>
+<a th:href="@{/nutrition}">back</a>
+
+<div class="container">
+    <div>
+        <form th:action="@{/nutrition/products/new}">
+            <input type="submit" value="Добавить">
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <td>Название продукта</td>
+                <td>белки</td>
+                <td>жиры</td>
+                <td>углеводы</td>
+                <td>цена</td>
+                <td>действие</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tempProduct : ${products}">
+                <td th:text="${tempProduct.name}"/>
+                <td th:text="${tempProduct.protein}"/>
+                <td th:text="${tempProduct.fat}"/>
+                <td th:text="${tempProduct.nutrition}"/>
+                <td th:text="${tempProduct.price}"/>
+                <td>
+                    <form th:method="GET" th:action="@{/nutrition/products/{id}/edit(id=${tempProduct.id})}">
+                        <input type="submit" value="Редактировать">
+                    </form>
+                    <form th:method="DELETE" th:action="@{/nutrition/products/{id}(id=${tempProduct.id})}">
+                        <input type="submit" value="Удалить">
+                    </form>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

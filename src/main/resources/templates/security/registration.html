@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration form</title>
+</head>
+<body>
+<h3> Create your account</h3>
+<div class="container">
+    <form action="#" th:action="@{/registration}" th:object="${userForm}" method="POST">
+
+        <!-- User name -->
+        <label for="username">Username</label>:
+        <input type="text" id="username" th:field="*{username}" autofocus="autofocus"/> <br/>
+
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('username')}"
+             th:errors="*{username}">
+        </div>
+
+        <!-- Password -->
+        <label for="password">Password</label>:
+        <input type="password" id="password" th:field="*{password}"/> <br/>
+
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('password')}"
+             th:errors="*{password}">
+        </div>
+
+        <!-- Password confirm -->
+        <label for="passwordConfirm">Password</label>:
+        <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}"/> <br/>
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('passwordConfirm')}"
+             th:errors="*{passwordConfirm}">
+        </div>
+
+        <!-- Email -->
+        <label for="email">Password</label>:
+        <input type="text" id="email" th:field="*{email}"/> <br/>
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('email')}"
+             th:errors="*{email}">
+        </div>
+
+        <!-- if passwords not equal -->
+        <ul th:if="${#fields.hasErrors('global')}">
+            <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
+        </ul>
+
+
+        <input type="submit" value="Register"/>
+    </form>
+</div>
+
+</body>
+</html>

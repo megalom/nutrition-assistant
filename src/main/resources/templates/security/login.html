@@ -9,9 +9,10 @@
 <h1>Login page</h1>
 <hr>
 
-<p th:if="${loginError}" class="error">Ошибка при вводе логина или пароля.</p>
+<p th:if="${error}" class="error">Ошибка при вводе логина или пароля.</p>
+<p th:if="${message}" class="error">Добро пожаловать.</p>
 
-<form th:action="@{/authenticate}" method="POST">
+<form action="#" th:action="@{/authenticate}" method="POST">
     <label for="username">Username</label>:
     <input type="text" id="username" name="username" autofocus="autofocus" /> <br/>
     <label for="password">Password</label>:
