@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit dish</title>
+</head>
+<body>
+<h3> Edit dish form:</h3>
+<div class="container">
+    <form action="#"
+          th:method="POST"
+          th:action="@{/nutrition/dishes/{id}/update(id=${editDishForm.id})}"
+          th:object="${editDishForm}">
+
+        <!-- Name exists error -->
+        <ul th:if="${#fields.hasErrors('global')}">
+            <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
+        </ul>
+
+        <input type="hidden" id="dishId" th:field="*{id}"/>
+        <!-- product name -->
+        <label for="dishName">Product name</label>:
+        <input type="text" id="dishName" th:field="*{name}" autofocus="autofocus"/> <br/>
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}">
+        </div>
+
+
+        <a th:href="@{/nutrition/dishes}">back</a>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+
+</body>
+</html>

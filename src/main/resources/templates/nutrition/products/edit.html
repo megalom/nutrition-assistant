@@ -7,13 +7,17 @@
 <body>
 <h3> Add new product</h3>
 <div class="container">
-    <form action="#" th:method="POST" th:action="@{/nutrition/products}" th:object="${productForm}" >
+    <form action="#"
+          th:method="POST"
+          th:action="@{/nutrition/products/{id}/update(id=${editProductForm.id})}"
+          th:object="${editProductForm}">
 
         <!-- Name exists error -->
         <ul th:if="${#fields.hasErrors('global')}">
             <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
         </ul>
 
+        <input type="hidden" id="productId" th:field="*{id}"/>
         <!-- product name -->
         <label for="productName">Product name</label>:
         <input type="text" id="productName" th:field="*{name}" autofocus="autofocus"/> <br/>
@@ -21,7 +25,6 @@
              th:if="${#fields.hasErrors('name')}"
              th:errors="*{name}">
         </div>
-
 
         <!-- protein -->
         <label for="protein">Protein</label>:

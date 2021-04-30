@@ -1,0 +1,61 @@
+#nutritionTable{
+    font-family : Arial, Helvetica,sans-serif;
+    border-collapse: collapse;
+    width:100%;
+    padding: 50px;
+}
+#nutritionTable td, #nutritionTable th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#nutritionTable tr:nth-child(even)
+{
+    background-color: #f2f2f2;
+}
+#nutritionTable tr:hover{background-color:#ddd}
+#nutritionTable thead {
+    padding-top:12px;
+    padding-bottom:12px;
+    text-align:left;
+    background-color: #4CAF50;
+    color:white;
+}
+
+.nutritionPageHead{
+    background-color: #4CAF50;
+    color:white;
+
+}
+
+a.menuLink:link,a.menuLink:visited {
+ background-color: rgb(40,170,40);
+ color:white;
+ text-align: center;
+ vertical-align:middle;
+ text-decoration:none;
+ padding-left:20px;
+ padding-right:20px;
+ padding-top:5px;
+ padding-bottom:5px;
+ width:100%;
+ height:100%;
+}
+
+a.menuLink:hover,a.menuLink:active {
+  background-color: rgb(40,220,40);
+}
+
+.menu{
+    width:100%;
+    height:30px;
+    background-color: rgb(40,170,40);
+    vertical-align:middle;
+}
+
+.element{
+    float:left;
+    vertical-align:middle;
+    border-right: 2px solid white;
+    height:100%;
+}
+

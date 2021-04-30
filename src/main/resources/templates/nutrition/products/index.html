@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Products list</title>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
 </head>
 <body>
-<h3>List of products:</h3>
-<a th:href="@{/nutrition}">back</a>
+<a th:href="@{/nutrition}">Назад</a>
 
 <div class="container">
-    <div>
-        <form th:action="@{/nutrition/products/new}">
-            <input type="submit" value="Добавить">
-        </form>
-    </div>
-    <table>
+    <h2 class="nutritionPageHead">Продукты:</h2>
+
+    <a th:href="@{/nutrition/products/new}">Добавить</a>
+    <table id="nutritionTable">
         <thead>
             <tr>
                 <td>Название продукта</td>
@@ -33,12 +31,16 @@
                 <td th:text="${tempProduct.nutrition}"/>
                 <td th:text="${tempProduct.price}"/>
                 <td>
+                    <a th:href="@{/nutrition/products/{id}/edit(id=${tempProduct.id})}">Редактировать</a>
+                    |
+                    <a th:href="@{/nutrition/products/{id}/delete(id=${tempProduct.id})}">Удалить</a>
+                    <!--
                     <form th:method="GET" th:action="@{/nutrition/products/{id}/edit(id=${tempProduct.id})}">
                         <input type="submit" value="Редактировать">
                     </form>
-                    <form th:method="DELETE" th:action="@{/nutrition/products/{id}(id=${tempProduct.id})}">
+                    <form th:method="GET" th:action="@{/nutrition/products/{id}/delete(id=${tempProduct.id})}">
                         <input type="submit" value="Удалить">
-                    </form>
+                    </form>-->
             </tr>
         </tbody>
     </table>

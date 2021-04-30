@@ -3,69 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Вас приветствует планировщик питания на каждый день</title>
-    <style type="text/css">
-	.block {
-	    padding: 0;
-	    font-size: 14px;
-	}
-	.block .element{
-	    border: solid 1px #C7CADD;
-	    margin: 0px 3px 3px 0px;
-	    padding: 0px 0px 0px 0px;
-	    float: left;
-	    height: 30px
-	    width: 150px;
-	}
-	.block .element:hover{
-	    border: solid 1px #000;
-	    margin: 0px 3px 3px 0px;
-	    padding: 0;
-	    float: left;
-	    height: 30px
-	    width: 150px;
-	    background: #FFFAE7;
-	}
-	.block .img{
-	    text-decoration: none;
-	}
-	.block .img img{
-	    margin: 5px 0px 0px 5px;
-	    padding: 0;
-	    width: 140px;
-	    height: 130px;
-	}
-	.block .text{
-	    text-align: center;
-	    padding: 0;
-	    margin: 0;
-	}
-</style>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
 </head>
 <body>
 <p th:text="'Здесь начинается планирование вашего питания.'" class="funny"/>
 
 <div id="container">
-    <div id="menu" class="block">
+    <div id="menu" class="menu">
         <div class="element">
-            <a href="/registration">Зарегистрироваться</a>
+            <a class="menuLink" th:href="@{/registration}">Зарегистрироваться</a>
         </div>
-        <div class="element">
-            <a href="/user/profile">Профиль</a>
-        </div>
-        <div class="element">
-            <div sec:authorize="isAnonymous()">
-                <form name="loginForm" th:action="@{/login}" method="get">
-                    <input type="submit" value="Войти"/>
-                </form>
-            </div>
 
-            <div sec:authorize="isAuthenticated()">
-                <form name="logoutForm" th:action="@{/logout}" method="post">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                    <input type="submit" value="Выйти"/>
-                </form>
-            </div>
+        <div class="element" sec:authorize="isAuthenticated()">
+            <a class="menuLink" th:href="@{/user/profile}">Профиль</a>
         </div>
+
+        <div class="element">
+
+            <form sec:authorize="isAnonymous()" th:action="@{/login}" method="GET">
+                <input type="submit" value="Войти"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+
+            <form sec:authorize="isAuthenticated()" th:action="@{/appLogout}" method="POST">
+                <input type="submit" value="Выйти"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+
+            <!--<a class="menuLink" sec:authorize="isAuthenticated()" th:href="@{/appLogout}">Выйти</a>-->
+        </div>
+
     </div>
 
 </div>
