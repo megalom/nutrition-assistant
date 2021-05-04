@@ -9,10 +9,21 @@ public class DishesProducts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
+/*
     @Column(name="dishes_id")
     private int dishesId;
     @Column(name="products_id")
     private int productsId;
+
+ */
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "dishes_id")
+    private Dish dish;
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name = "products_id")
+    private Product product;
+
     @Column(name="weight")
     private float weight;
 
@@ -27,20 +38,20 @@ public class DishesProducts {
         this.id = id;
     }
 
-    public int getDishesId() {
-        return dishesId;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setDishesId(int dishesId) {
-        this.dishesId = dishesId;
+    public void setDish(Dish dish) {
+        this.dish = dish;
     }
 
-    public int getProductsId() {
-        return productsId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductsId(int productsId) {
-        this.productsId = productsId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public float getWeight() {

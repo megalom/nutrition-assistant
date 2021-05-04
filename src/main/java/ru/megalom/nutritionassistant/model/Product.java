@@ -39,29 +39,8 @@ public class Product {
     @Column(name="price")
     private float price;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    @JoinTable(name="dishes_products",
-            joinColumns = @JoinColumn(name="products_id"),
-            inverseJoinColumns = @JoinColumn(name="products_id")
-    )
-    Set<DishesProducts> dishesProducts;
-
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    @JoinTable(name="dishes_products",
-            joinColumns = @JoinColumn(name="products_id"),
-            inverseJoinColumns = @JoinColumn(name="dishes_id")
-    )
-    Set<Dish> dishes;
+    @OneToMany(mappedBy = "product")
+    private Set <DishesProducts> dishesProducts;
 
     public Product() {
     }
@@ -112,5 +91,13 @@ public class Product {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public Set<DishesProducts> getDishesProducts() {
+        return dishesProducts;
+    }
+
+    public void setDishesProducts(Set<DishesProducts> dishesProducts) {
+        this.dishesProducts = dishesProducts;
     }
 }

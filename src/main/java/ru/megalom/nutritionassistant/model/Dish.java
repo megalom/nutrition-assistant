@@ -7,21 +7,14 @@ import ru.megalom.nutritionassistant.validator.UniqueDishNameConstraint;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 @Entity
 @Table(name="dishes")
-@SecondaryTable(
-        name = "dishes_products",
-        pkJoinColumns = {
-                @PrimaryKeyJoinColumn(name="id",referencedColumnName="dishes_id")
-})
 @UniqueDishNameConstraint(message = "{Exists.dishForm.NameExists}")
 public class Dish {
-    @Autowired
-    DishesProductsService dishesProductsService;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -32,20 +25,9 @@ public class Dish {
     @Column(name="name")
     private String name;
 
-    @Column(table = "dishes_products",name="weight")
-    private float weight;
 
-    @ManyToMany(
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH,
-                    CascadeType.MERGE,
-                    CascadeType.PERSIST,
-                    CascadeType.REFRESH})
-    @JoinTable(name="dishes_products",
-            joinColumns = @JoinColumn(name="dishes_id"),
-            inverseJoinColumns = @JoinColumn(name="products_id")
-    )
-    Set<Product> products;
+    @OneToMany(mappedBy = "dish")
+    private Set <DishesProducts> dishesProducts = new HashSet<>();
 
 
     public Dish() {
@@ -67,32 +49,17 @@ public class Dish {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<DishesProducts> getDishesProducts() {
+        return dishesProducts;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public void setDishesProducts(Set<DishesProducts> dishesProducts) {
+        this.dishesProducts = dishesProducts;
     }
 
     // возвращает количество белка в 100 г блюда
     public float getProtein(){
         float protein=0.0f;
-        Iterator<Product> productIterator= products.iterator();
-        while(productIterator.hasNext()){
-            Product tmpProduct = productIterator.next();
-            DishesProducts dishesProducts=dishesProductsService.findByDishesIdAndProductsId(id,tmpProduct.getId());
-            float weight=dishesProducts.getWeight();
-            protein+=tmpProduct.getProtein()*0.01f*weight;
-        }
         return protein;
     }
 

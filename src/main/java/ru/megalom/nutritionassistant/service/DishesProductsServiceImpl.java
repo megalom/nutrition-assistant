@@ -17,7 +17,7 @@ public class DishesProductsServiceImpl implements DishesProductsService{
     DishesProductsRepository dishRepository;
 
     @Override
-    public DishesProducts findByDishesIdAndProductsId(int dishesId,int productsId){
-        return dishRepository.findByDishesIdAndProductsId(dishesId,productsId);
+    public DishesProducts findByDishAndProduct(int dishId,int productId){
+        return dishRepository.findByDish_IdAndProduct_Id(dishId,productId);
     }
 }

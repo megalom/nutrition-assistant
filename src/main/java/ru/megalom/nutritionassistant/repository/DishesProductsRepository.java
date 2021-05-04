@@ -6,5 +6,5 @@ import ru.megalom.nutritionassistant.model.DishesProducts;
 
 public interface DishesProductsRepository extends JpaRepository<DishesProducts,Integer> {
     //DishesProducts findByNameIgnoreCase(String dishName);
-    DishesProducts findByDishesIdAndProductsId(int dishesId,int productsId);
+    DishesProducts findByDish_IdAndProduct_Id(int dishId,int productId);
 }
