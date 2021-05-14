@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dishes list</title>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
+</head>
+<body>
+<a th:href="@{/nutrition/dishes}">Назад</a>
+
+<div class="container">
+    <h2 class="nutritionPageHead">Состав блюда
+        "<span th:text="${dish.name}">userName</span>":
+    </h2>
+
+    <a th:href="@{/nutrition/dishes/{id}/addProduct(id=${dish.id})}">Добавить</a>
+
+    <table id="nutritionTable">
+        <thead>
+        <tr>
+            <td>Название продукта</td>
+            <td>Вес</td>
+            <td>Белки</td>
+            <td>Жиры</td>
+            <td>Углеводы</td>
+            <td>Калорийность</td>
+            <td>Цена</td>
+            <td>Действие</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dp : ${dish.dishesProducts}">
+            <td th:text="${dp.product.name}"/>
+            <td th:text="${dp.weight}"/>
+            <td th:text="${dp.protein}"/>
+            <td th:text="${dp.fat}"/>
+            <td th:text="${dp.nutrition}"/>
+            <td th:text="${dp.calories}"/>
+            <td th:text="${dp.price}"/>
+            <td>
+                <a th:href="@{/nutrition/dishes/{id}/deleteProduct?dpId={dpId}(id=${dish.id},dpId=${dp.id})}">Удалить</a>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

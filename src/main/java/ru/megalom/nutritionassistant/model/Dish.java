@@ -25,7 +25,6 @@ public class Dish {
     @Column(name="name")
     private String name;
 
-
     @OneToMany(mappedBy = "dish")
     private Set <DishesProducts> dishesProducts = new HashSet<>();
 
@@ -59,26 +58,25 @@ public class Dish {
 
     // возвращает количество белка в 100 г блюда
     public float getProtein(){
-        float protein=0.0f;
-        return protein;
+        return Calculator.getProteinFromDish(this);
     }
 
     // возвращает количество жира в 100 г блюда
     public float getFat(){
-        return 1.0f;
+        return Calculator.getFatFromDish(this);
     }
 
     // возвращает количество углеводов 100 г блюда
     public float getNutrition(){
-        return 2.0f;
-    }
-    //Возвращает количество калорий в 100 г. блюда
-    //подсчет калорий из рассчета на каллории в 1г * количество грамм
-    public float getCalories(){
-        return getFat()*9.29f+getProtein()*4.1f+getNutrition()*4.1f;
+        return Calculator.getNutritionFromDish(this);
     }
 
+    public float getCalories(){
+        return Calculator.getCaloriesFromDish(this);
+    }
+
+    // возвращает цену 100 г блюда
     public float getPrice(){
-        return 4.0f;
+        return Calculator.getPriceFromDish(this);
     }
 }

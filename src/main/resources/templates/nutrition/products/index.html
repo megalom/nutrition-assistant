@@ -19,6 +19,7 @@
                 <td>белки</td>
                 <td>жиры</td>
                 <td>углеводы</td>
+                <td>калорийность</td>
                 <td>цена</td>
                 <td>действие</td>
             </tr>
@@ -29,6 +30,7 @@
                 <td th:text="${tempProduct.protein}"/>
                 <td th:text="${tempProduct.fat}"/>
                 <td th:text="${tempProduct.nutrition}"/>
+                <td th:text="${tempProduct.calories}"/>
                 <td th:text="${tempProduct.price}"/>
                 <td>
                     <a th:href="@{/nutrition/products/{id}/edit(id=${tempProduct.id})}">Редактировать</a>

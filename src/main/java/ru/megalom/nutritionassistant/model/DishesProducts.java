@@ -61,4 +61,24 @@ public class DishesProducts {
     public void setWeight(float weight) {
         this.weight = weight;
     }
+
+    public float getProtein(){
+        return Calculator.getProteinFromProduct(product,weight);
+    }
+
+    public float getFat(){
+        return Calculator.getFatFromProduct(product,weight);
+    }
+
+    public float getNutrition(){
+        return Calculator.getNutritionFromProduct(product,weight);
+    }
+
+    public float getPrice(){
+        return Calculator.getPriceFromProduct(product,weight);
+    }
+
+    public float getCalories(){
+        return Calculator.getCaloriesFromProduct(product,weight);
+    }
 }

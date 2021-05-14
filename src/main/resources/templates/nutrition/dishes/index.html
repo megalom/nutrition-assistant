@@ -9,9 +9,10 @@
 <a th:href="@{/nutrition}">Назад</a>
 
 <div class="container">
-    <h2 class="nutritionPageHead">Продукты:</h2>
+    <h2 class="nutritionPageHead">Блюда:</h2>
 
     <a th:href="@{/nutrition/dishes/new}">Добавить</a>
+
     <table id="nutritionTable">
         <thead>
             <tr>
@@ -19,21 +20,31 @@
                 <td>белки</td>
                 <td>жиры</td>
                 <td>углеводы</td>
+                <td>калорийность</td>
                 <td>цена</td>
                 <td>действие</td>
             </tr>
         </thead>
         <tbody>
             <tr th:each="tmpDish : ${dishes}">
-                <td th:text="${tmpDish.name}"/>
+
+                <td>
+                    <a th:href="@{/nutrition/dishes/{id}/composition(id=${tmpDish.id})}">
+                        <span th:text="${tmpDish.name}"/>
+                    </a>
+                </td>
+
                 <td th:text="${tmpDish.protein}"/>
                 <td th:text="${tmpDish.fat}"/>
                 <td th:text="${tmpDish.nutrition}"/>
+                <td th:text="${tmpDish.calories}"/>
                 <td th:text="${tmpDish.price}"/>
                 <td>
-                    <a th:href="@{/nutrition/dishes/{id}/edit(id=${tmpDish.id})}">Редактировать</a>
+                    <a th:href="@{/nutrition/dishes/{id}/edit(id=${tmpDish.id})}">
+                        Переименовать</a>
                     |
-                    <a th:href="@{/nutrition/dishes/{id}/delete(id=${tmpDish.id})}">Удалить</a>
+                    <a th:href="@{/nutrition/dishes/{id}/delete(id=${tmpDish.id})}">
+                        Удалить</a>
             </tr>
         </tbody>
     </table>

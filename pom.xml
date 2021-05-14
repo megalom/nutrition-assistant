@@ -11,6 +11,7 @@
 	<groupId>ru.megalom</groupId>
 	<artifactId>nutrition-assistant</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!--<packaging>war</packaging>-->
 	<name>nutrition-assistant</name>
 	<description>Nutrition planning on every day</description>
 	<properties>
@@ -73,6 +74,12 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!--
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>-->
 
 	</dependencies>
 
@@ -81,6 +88,26 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>tomcatserver</server>
+					<path>/</path>
+					<username>admin</username>
+					<password>admin</password>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

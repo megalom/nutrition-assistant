@@ -85,6 +85,10 @@ public class Product {
         this.nutrition = nutrition;
     }
 
+    public float getCalories(){
+        return Calculator.getCaloriesFromProduct(this);
+    }
+
     public float getPrice() {
         return price;
     }
