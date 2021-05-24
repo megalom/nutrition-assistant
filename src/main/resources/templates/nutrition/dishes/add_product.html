@@ -54,11 +54,7 @@
                 <td th:text="${tempProduct.calories}"/>
                 <td th:text="${tempProduct.price}"/>
                 <td>
-                    <input type="button" th:onclick="|selectProduct('${tempProduct.id}')|" th:value="${tempProduct.id}">
-                    <a th:href="@{/nutrition/dishes/{dishId}/addProduct
-                    (dishId=${dishesProductsForm.dishId})}">
-                        Добавить
-                    </a>
+                    <input type="button" th:onclick="|selectProduct('${tempProduct.id}')|" th:value="Добавить">
                 </td>
             </tr>
         </tbody>
@@ -71,7 +67,7 @@
     </div>
 </div>
 
-<form id='dishesProductsForm' action="#" th:method="POST" th:action="@{/nutrition/dishes/addProduct}" th:object="${dishesProductsForm}" >
+<form style="display:none" id='dishesProductsForm' action="#" th:method="POST" th:action="@{/nutrition/dishes/addProduct}" th:object="${dishesProductsForm}" >
     <input type="text" id="Id" th:field="*{id}"/>
     <input type="text" id="dishId" th:field="*{dishId}"/>
     <input type="text" id="productId" th:field="*{productId}"/>

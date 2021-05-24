@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -59,6 +60,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private Set <UsersDishes> usersDishes = new HashSet<>();
 
     public User() {
     }

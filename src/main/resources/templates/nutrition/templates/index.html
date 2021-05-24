@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menus list</title>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
+</head>
+<body>
+<a th:href="@{/nutrition}">Назад</a>
+
+<div class="container">
+    <h2 class="nutritionPageHead">Список шаблонов меню:</h2>
+
+    <a th:href="@{/nutrition/templates/new}">Добавить</a>
+
+    <table id="nutritionTable">
+        <thead>
+            <tr>
+                <td>название меню</td>
+                <td>белки</td>
+                <td>жиры</td>
+                <td>углеводы</td>
+                <td>калорийность</td>
+                <td>цена</td>
+                <td>действие</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tmpMenu : ${menus}">
+
+                <td>
+                    <a th:href="@{/nutrition/templates/{id}/composition(id=${tmpMenu.id})}">
+                        <span th:text="${tmpMenu.name}"/>
+                    </a>
+                </td>
+
+                <td th:text="${tmpMenu.protein}"/>
+                <td th:text="${tmpMenu.fat}"/>
+                <td th:text="${tmpMenu.nutrition}"/>
+                <td th:text="${tmpMenu.calories}"/>
+                <td th:text="${tmpMenu.price}"/>
+                <td>
+                    <a th:href="@{/nutrition/templates/{id}/edit(id=${tmpMenu.id})}">
+                        Переименовать</a>
+                    |
+                    <a th:href="@{/nutrition/templates/{id}/delete(id=${tmpMenu.id})}">
+                        Удалить</a>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

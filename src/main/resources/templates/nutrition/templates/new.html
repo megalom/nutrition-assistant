@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление шаблона меню</title>
+</head>
+<body>
+<h3> Добавление шаблона меню </h3>
+<div class="container">
+    <form action="#" th:method="POST" th:action="@{/nutrition/templates}" th:object="${menuTemplateForm}" >
+
+        <!-- Name exists error -->
+        <ul th:if="${#fields.hasErrors('global')}">
+            <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
+        </ul>
+
+        <!-- template name -->
+        <label for="menuTemplateName">Название шаблона:</label>
+        <input type="text" id="menuTemplateName" th:field="*{name}" autofocus="autofocus"/> <br/>
+
+        <div class="alert alert-warning"
+             th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}">
+        </div>
+
+
+
+
+        <a th:href="@{/nutrition/templates}">Назад</a>
+        <input type="submit" value="Добавить"/>
+    </form>
+</div>
+
+</body>
+</html>

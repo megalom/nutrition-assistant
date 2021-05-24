@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление блюда в шаблон</title>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
+    <script type="text/javascript">
+        function hide(element){
+            element.style.display = 'none'
+        }
+        function show(element){
+            element.style.display = 'inline'
+        }
+        function selectDish(id){
+            document.getElementById('dishId').value=`${id}`
+            hide(document.getElementById('nutritionTable'))
+            show(document.getElementById('weightInput'))
+        }
+        function dishList(){
+            hide(document.getElementById('weightInput'))
+            show(document.getElementById('nutritionTable'))
+        }
+        function addDish(){
+            document.getElementById('weight').value=document.getElementById('dish_weight').value
+            document.getElementById('eatTypeId').value=document.getElementById('eat_type').value
+            document.getElementById('templatesDishesFrom').submit()
+        }
+    </script>
+</head>
+
+
+<body>
+<a th:href="@{/nutrition/templates/{id}/composition(id=${templatesDishesFrom.templateId})}">Назад</a>
+
+<div class="container">
+    <h2 class="nutritionPageHead">Список блюд:</h2>
+
+    <table id="nutritionTable">
+        <thead>
+            <tr>
+                <td>Название блюда</td>
+                <td>Белки</td>
+                <td>Жиры</td>
+                <td>Углеводы</td>
+                <td>Калорийность</td>
+                <td>Цена</td>
+                <td>Действие</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tempDish : ${dishes}">
+                <td th:text="${tempDish.name}"/>
+                <td th:text="${tempDish.protein}"/>
+                <td th:text="${tempDish.fat}"/>
+                <td th:text="${tempDish.nutrition}"/>
+                <td th:text="${tempDish.calories}"/>
+                <td th:text="${tempDish.price}"/>
+                <td>
+                    <input type="button" th:onclick="|selectDish('${tempDish.id}')|" th:value="Добавить">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="weightInput" style="display:none">
+        <label name="dish_weight">Вес блюда:</label>
+        <input type="text" name = "dish_weight" id="dish_weight"/>
+
+        <label name="eat_type">Время приема:</label>
+        <!--<input type="text" name = "eat_type" id="eat_type"/>-->
+        <select name = "eat_type" id="eat_type">
+            <option th:each="eat_type : ${eat_types}" th:text="${eat_type.name}" th:value="${eat_type.id}"/>
+        </select>
+
+        <input type="button" th:onclick="|addDish()|" id="weightValue" value = "Добавить блюдо в меню">
+        <input type="button" th:onclick="|dishList()|" value = "Назад">
+    </div>
+
+</div>
+
+<form style="display:none" id='templatesDishesFrom'
+      action="#" th:method="POST"
+      th:action="@{/nutrition/templates/addDish}"
+      th:object="${templatesDishesFrom}" >
+
+    <input type="text" id="Id" th:field="*{id}"/>
+    <input type="text" id="dishId" th:field="*{dishId}"/>
+    <input type="text" id="templateId" th:field="*{templateId}"/>
+    <input type="text" id="eatTypeId" th:field="*{eatTypeId}"/>
+    <input type="text" id="weight" th:field="*{weight}"/>
+</form>
+
+</body>
+</html>

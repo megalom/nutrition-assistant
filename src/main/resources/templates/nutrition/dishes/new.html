@@ -2,10 +2,10 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add new product</title>
+    <title>Добавление нового блюда</title>
 </head>
 <body>
-<h3> Add new dish</h3>
+<h3> Добавить новое блюдо</h3>
 <div class="container">
     <form action="#" th:method="POST" th:action="@{/nutrition/dishes}" th:object="${dishForm}" >
 
@@ -15,7 +15,7 @@
         </ul>
 
         <!-- dish name -->
-        <label for="dishName">Dish name</label>:
+        <label for="dishName">Название блюда:</label>
         <input type="text" id="dishName" th:field="*{name}" autofocus="autofocus"/> <br/>
         <div class="alert alert-warning"
              th:if="${#fields.hasErrors('name')}"
@@ -25,8 +25,8 @@
 
 
 
-        <a th:href="@{/nutrition/dishes}">back</a>
-        <input type="submit" value="Save"/>
+        <a th:href="@{/nutrition/dishes}">Назад</a>
+        <input type="submit" value="Сохранить"/>
     </form>
 </div>
 

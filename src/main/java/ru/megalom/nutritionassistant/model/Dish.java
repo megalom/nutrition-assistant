@@ -1,14 +1,11 @@
 package ru.megalom.nutritionassistant.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.megalom.nutritionassistant.service.DishesProductsService;
 import ru.megalom.nutritionassistant.validator.UniqueDishNameConstraint;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 @Entity
@@ -25,8 +22,14 @@ public class Dish {
     @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set <DishesProducts> dishesProducts = new HashSet<>();
+
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
+    private Set <UsersDishes> usersDishes = new HashSet<>();
+
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
+    private Set <TemplatesDishes> templatesDishes = new HashSet<>();
 
 
     public Dish() {
@@ -78,5 +81,17 @@ public class Dish {
     // возвращает цену 100 г блюда
     public float getPrice(){
         return Calculator.getPriceFromDish(this);
+    }
+
+    public float getTotalWeight(){
+        return Calculator.getTotalDishWeight(this);
+    }
+
+    public Set<UsersDishes> getUsersDishes() {
+        return usersDishes;
+    }
+
+    public Set<TemplatesDishes> getMenuTemplates() {
+        return templatesDishes;
     }
 }

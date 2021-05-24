@@ -2,32 +2,33 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Переименование блюда</title>
+    <title>Изменение имени шаблона</title>
 </head>
 <body>
-<h3> Переименование блюда:</h3>
+<h3> Изменение имени шаблона:</h3>
 <div class="container">
     <form action="#"
           th:method="POST"
-          th:action="@{/nutrition/dishes/{id}/update(id=${editDishForm.id})}"
-          th:object="${editDishForm}">
+          th:action="@{/nutrition/templates/{id}/update(id=${editMenuTemplateForm.id})}"
+          th:object="${editMenuTemplateForm}">
 
         <!-- Name exists error -->
         <ul th:if="${#fields.hasErrors('global')}">
             <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
         </ul>
 
-        <input type="hidden" id="dishId" th:field="*{id}"/>
-        <!-- product name -->
-        <label for="dishName">Product name</label>:
-        <input type="text" id="dishName" th:field="*{name}" autofocus="autofocus"/> <br/>
+        <input type="hidden" id="menuTemplateId" th:field="*{id}"/>
+        <!-- menu template name -->
+        <label for="menuTemplateName">Название шаблона:</label>
+        <input type="text" id="menuTemplateName" th:field="*{name}" autofocus="autofocus"/> <br/>
+
         <div class="alert alert-warning"
              th:if="${#fields.hasErrors('name')}"
              th:errors="*{name}">
         </div>
 
 
-        <a th:href="@{/nutrition/dishes}">Назад</a>
+        <a th:href="@{/nutrition/templates}">Назад</a>
         <input type="submit" value="Сохранить"/>
     </form>
 </div>

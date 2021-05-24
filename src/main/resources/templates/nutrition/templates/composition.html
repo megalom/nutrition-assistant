@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Список блюд</title>
+    <link rel="stylesheet" th:href="@{/css/cool_style.css}"/>
+</head>
+
+<body>
+
+<a th:href="@{/nutrition/templates}">Назад</a>
+
+<div class="container">
+    <h2 class="nutritionPageHead">Состав меню
+        "<span th:text="${menuTemplate.name}">menu name</span>":
+    </h2>
+
+    <a th:href="@{/nutrition/templates/{id}/addDish(id=${menuTemplate.id})}">Добавить</a>
+
+    <table id="nutritionTable">
+        <thead>
+        <tr>
+            <td>Время приема</td>
+            <td>Название блюда</td>
+            <td>Вес</td>
+            <td>Белки</td>
+            <td>Жиры</td>
+            <td>Углеводы</td>
+            <td>Калорийность</td>
+            <td>Цена</td>
+            <td>Действие</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="td : ${menuTemplate.templatesDishes}">
+            <td th:text="${td.eatType.name}"/>
+            <td th:text="${td.dish.name}"/>
+            <td th:text="${td.weight}"/>
+            <td th:text="${td.protein}"/>
+            <td th:text="${td.fat}"/>
+            <td th:text="${td.nutrition}"/>
+            <td th:text="${td.calories}"/>
+            <td th:text="${td.price}"/>
+            <td>
+                <a th:href="@{/nutrition/templates/{id}/deleteDish?tdId={tdId}(id=${menuTemplate.id},tdId=${td.id})}">
+                    Удалить
+                </a>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
